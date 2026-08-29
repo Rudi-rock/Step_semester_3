@@ -1,15 +1,15 @@
 package constructs.class_problems;
 
-public class LibraryBook {
+public class BookCataloguing {
     String title;
     String isbn;
 
-    public LibraryBook(String title, String isbn) {
+    public BookCataloguing(String title, String isbn) {
         this.title = title;
         this.isbn = (isbn == null || isbn.trim().isEmpty()) ? "PENDING" : isbn;
     }
 
-    public LibraryBook(String title) {
+    public BookCataloguing(String title) {
         this(title, "PENDING");
     }
 
@@ -22,9 +22,9 @@ public class LibraryBook {
         String[] isbns = {"978-0132350884", "", "9780451524935", ""};
 
         for (int i = 0; i < titles.length; i++) {
-            LibraryBook book = (isbns[i] == null || isbns[i].isEmpty())
-                    ? new LibraryBook(titles[i])
-                    : new LibraryBook(titles[i], isbns[i]);
+            BookCataloguing book = (isbns[i] == null || isbns[i].isEmpty())
+                    ? new BookCataloguing(titles[i])
+                    : new BookCataloguing(titles[i], isbns[i]);
             book.display();
         }
     }
