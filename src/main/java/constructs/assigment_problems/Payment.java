@@ -47,3 +47,14 @@ public class Payment {
         System.out.println("Total collected: Rs " + totalCollected);
     }
 }
+
+class CardPayment extends Payment {
+
+    public CardPayment() {
+        super(0.0);
+    }
+
+    public CardPayment(double amount) {
+        super(amount);
+    }
+}
