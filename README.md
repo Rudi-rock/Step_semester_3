@@ -4,14 +4,14 @@
 
 **Today's Work:**
 - Completed Week 4: Constructors and Java Keywords, Category B Assignment Problems:
-  1. Library Book Cataloguing - `this()` constructor chaining
-  2. Payroll Batch Bonus Round - `this` keyword to resolve field/parameter name clashes
-  3. Late Fees - `final` methods for locking calculation formulas
-  4. One-Time College Setup - `static` blocks for one-time college data initialization
-  5. Account Batch Payments - `instanceof` operator for type checking and polymorphic dispatch
+  1. Participant (`this()` constructor chaining)
+  2. Item (`this` keyword for resolving field/parameter naming clashes)
+  3. ParkingTicket (`final` methods for fine calculation and receipt generation)
+  4. MembershipCard (`static` blocks for one-time library information initialization)
+  5. Payment and CardPayment (`instanceof` operator for polymorphic payment processing)
 
 **Next Session Plan:**
-- Begin Week 5 topics covering Inheritance, Method Overriding, and Polymorphic design patterns.
+- Begin Session 3 / Week 5 topics covering Inheritance, Method Overriding, and Polymorphism.
 
 **Issues Faced:**
 - None
