@@ -1,5 +1,23 @@
 # Step_semester_3
 
+## Date: 04-09-2026
+
+**Today's Work:**
+- Completed Week 4: Constructors and Java Keywords, Category B Assignment Problems:
+  1. Library Book Cataloguing - `this()` constructor chaining
+  2. Payroll Batch Bonus Round - `this` keyword to resolve field/parameter name clashes
+  3. Late Fees - `final` methods for locking calculation formulas
+  4. One-Time College Setup - `static` blocks for one-time college data initialization
+  5. Account Batch Payments - `instanceof` operator for type checking and polymorphic dispatch
+
+**Next Session Plan:**
+- Begin Week 5 topics covering Inheritance, Method Overriding, and Polymorphic design patterns.
+
+**Issues Faced:**
+- None
+
+---
+
 ## Date: 29-08-2026
 
 **Today's Work:**
