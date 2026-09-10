@@ -1,5 +1,32 @@
 # Step_semester_3
 
+## Date: 11-09-2026
+
+**Today's Work:**
+- Completed Week 6 Individual Homework covering:
+  - Access Modifiers
+  - private/default/protected/public
+  - Encapsulation
+  - Constructor validation
+  - JavaBeans
+  - Write-once property
+  - Write-only property
+  - Immutability
+  - final fields/classes
+  - Defensive copying
+  - wither pattern
+  - instanceof
+  - Static initialization
+  - Null-safe processing
+
+**Next Session Plan:**
+- Continue with upcoming semester assignments.
+
+**Issues Faced:**
+- None
+
+---
+
 ## Date: 04-09-2026
 
 **Today's Work:**
