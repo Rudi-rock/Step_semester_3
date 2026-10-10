@@ -38,8 +38,6 @@ public class WeeklyCheckInSettlement {
 
         public void payFee(int amount, String mode) {
 
-            // Mode is recorded conceptually,
-            // then actual payment logic is reused.
             payFee(amount);
         }
 

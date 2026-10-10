@@ -15,10 +15,8 @@ public class StudentDiscountFineLedger {
         int[] history = s.getFineHistory();
         System.out.println("Fine history: " + Arrays.toString(history));
 
-        // Attempting to mutate returned history array
         history[0] = 999;
 
-        // Verify defensive copy preserved internal state
         int[] safeHistory = s.getFineHistory();
         System.out.println("Fine history after outside modification attempt: " + Arrays.toString(safeHistory));
         System.out.println("Tamper resistance verified: " + (safeHistory[0] == 50));

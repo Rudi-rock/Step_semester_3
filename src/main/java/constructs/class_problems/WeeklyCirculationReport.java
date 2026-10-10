@@ -14,10 +14,9 @@ public class WeeklyCirculationReport {
             if (m == null) {
                 continue;
             }
-            // Polymorphic call to displayInfo() without using instanceof to decide output
+
             sb.append(m.displayInfo());
 
-            // Safely guarded downcast only for genuine StudentMember instances to access course
             if (m instanceof StudentMember) {
                 StudentMember sm = (StudentMember) m;
                 sb.append(" [Course via downcast: ").append(sm.getCourse()).append("]");
@@ -36,7 +35,6 @@ public class WeeklyCirculationReport {
         String report = batchPrint(members);
         System.out.println(report);
 
-        // Demonstrating safe vs unsafe downcasting
         LibraryMember plain = new LibraryMember("LB6", 3);
         try {
             StudentMember bad = (StudentMember) plain;

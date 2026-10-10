@@ -97,13 +97,13 @@ public class ThreeBranchesMembershipTree {
         System.out.println(classifyGeneration(faculty));
 
         student.borrowBook();
-        student.borrowBook(); // 2
+        student.borrowBook();
 
-        honors.borrowBook(); // 1
+        honors.borrowBook();
 
         faculty.borrowBook();
         faculty.borrowBook();
-        faculty.borrowBook(); // 3
+        faculty.borrowBook();
 
         LibraryMember[] members = {student, honors, faculty};
         System.out.println("Total books borrowed: " + getTotalBooksBorrowed(members));
