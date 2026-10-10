@@ -2,7 +2,7 @@ package constructs.class_problems;
 
 class MovieTicket {
     private String screenId;
-    int seatNumber; // default
+    int seatNumber;
     protected double ticketPrice;
     public String movieTitle;
 }
@@ -17,12 +17,12 @@ public class MovieTicketFieldVisibilityChecker {
             default: return "DENIED";
         }
     }
-    
+
     static String summarizeBatch(String[][] attempts) {
         int[] allowed = new int[4];
         int[] denied = new int[4];
         String[] mods = {"private", "default", "protected", "public"};
-        
+
         for (String[] attempt : attempts) {
             String mod = attempt[0];
             String ctx = attempt[1];

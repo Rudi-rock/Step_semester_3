@@ -38,13 +38,13 @@ public class BookCopyCirculationGuard {
         b.checkOut();
         b.checkOut();
         System.out.println(b.getCopiesAvailable());
-        
+
         b.checkIn();
         b.checkIn();
         b.checkIn();
         b.checkIn();
         System.out.println(b.getCopiesAvailable());
-        
+
         new BookInventory(0);
     }
 }

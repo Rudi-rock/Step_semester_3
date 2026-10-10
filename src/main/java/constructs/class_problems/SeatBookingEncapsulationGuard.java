@@ -34,13 +34,13 @@ public class SeatBookingEncapsulationGuard {
         screen.bookSeat();
         screen.bookSeat();
         System.out.println(screen.getSeatsAvailable());
-        
+
         screen.cancelBooking();
         screen.cancelBooking();
         screen.cancelBooking();
         screen.cancelBooking();
         System.out.println(screen.getSeatsAvailable());
-        
+
         new CineScreen(0);
     }
 }

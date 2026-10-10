@@ -1,7 +1,7 @@
 package constructs.assigment_problems;
 
 public class LibraryMemberJavaBean {
-    
+
     static class LibraryMember {
         private String membershipId;
         private String name;
@@ -54,7 +54,7 @@ public class LibraryMemberJavaBean {
         m.setMembershipId("FAKE-0000");
         System.out.println(m.getMembershipId());
         System.out.println(m.isPremiumMember());
-        
+
         m.setSecurityAnswer("BlueMountain");
     }
 }

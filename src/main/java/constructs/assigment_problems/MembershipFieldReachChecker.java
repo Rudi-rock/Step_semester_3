@@ -1,10 +1,10 @@
 package constructs.assigment_problems;
 
 public class MembershipFieldReachChecker {
-    
+
     static class LibraryMember {
         private String membershipPin;
-        String branchCode; // default
+        String branchCode;
         protected double finesOwed;
         public String displayName;
     }
@@ -18,17 +18,17 @@ public class MembershipFieldReachChecker {
             default: return "DENIED";
         }
     }
-    
+
     static String summarizeByModifier(String[][] attempts) {
         int[] allowed = new int[4];
         int[] denied = new int[4];
         String[] modifiers = {"private", "default", "protected", "public"};
-        
+
         for (String[] attempt : attempts) {
             String modifier = attempt[0];
             String context = attempt[1];
             String result = classifyAccess(modifier, context);
-            
+
             int idx = -1;
             for (int i = 0; i < modifiers.length; i++) {
                 if (modifiers[i].equals(modifier)) {
@@ -41,7 +41,7 @@ public class MembershipFieldReachChecker {
                 else denied[idx]++;
             }
         }
-        
+
         return String.format("private: %d allowed / %d denied | default: %d allowed / %d denied | protected: %d allowed / %d denied | public: %d allowed / %d denied",
                 allowed[0], denied[0], allowed[1], denied[1], allowed[2], denied[2], allowed[3], denied[3]);
     }

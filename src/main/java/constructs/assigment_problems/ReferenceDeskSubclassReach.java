@@ -1,7 +1,7 @@
 package constructs.assigment_problems;
 
 public class ReferenceDeskSubclassReach {
-    
+
     static String classifyAccess(String fieldModifier, String accessorContext) {
         switch (fieldModifier) {
             case "private":

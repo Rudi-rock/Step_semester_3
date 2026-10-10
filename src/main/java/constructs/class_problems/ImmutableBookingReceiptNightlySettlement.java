@@ -28,7 +28,7 @@ final class BookingReceipt {
 class GroupBookingReceipt {
     private String bookingId;
     private String[] seatNumbers;
-    
+
     public GroupBookingReceipt(String bookingId, String[] seatNumbers) {
         this.bookingId = bookingId;
         this.seatNumbers = new String[seatNumbers.length];
@@ -69,7 +69,7 @@ public class ImmutableBookingReceiptNightlySettlement {
         BookingReceipt r = new BookingReceipt("B-003", new String[]{"C1", "C2"});
         r.getSeatNumbers()[0] = "HACKED";
         System.out.println(r.getSeatNumbers()[0]);
-        
+
         BookingReceipt updated = r.withUpdatedSeat(1, "C3");
         System.out.println(r.getSeatNumbers()[1]);
         System.out.println(updated.getSeatNumbers()[1]);
