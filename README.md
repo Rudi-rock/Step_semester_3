@@ -1,119 +1,86 @@
 # Step_semester_3         
 
-## Date: 09-10-2026
+## Date: 03-10-2026
 
 **Today's Work:**
-- Completed Session 7 covering Arrays, Searching, and Sliding Window techniques:
-  - Binary Search on sorted data (Library Catalog Lookup, Ticket Price Slot Finder)
-  - 2D Array traversal and aggregation (Warehouse Grid Summary, Class Topper Finder)
-  - Pair with Target Sum — brute-force vs HashSet approach
-  - Two-pointer technique (Maximize Area Between Two Boundaries)
-  - Sliding Window pattern (Hot Weather Alert Windows)
-  - Merging two sorted arrays using two pointers
+- Practiced Data Structures, Searching, and Algorithmic problem solving:
+  - Efficient searching with Binary Search on sorted datasets
+  - 2D grid matrix traversals and row/column aggregations
+  - Two-pointer techniques for pair searching and boundary area optimization
+  - Sliding window patterns for fixed and dynamic range evaluations
+  - HashSet lookups for constant-time search optimizations
 
 **Next Session Plan:**
-- Continue with upcoming semester assignments.
+- Continue with upcoming semester data structures and algorithm topics.
 
 **Issues Faced:**
 - None
 
 ---
 
-## Date: 02-10-2026
+## Date: 26-09-2026
 
 **Today's Work:**
-- Completed Session 6 covering Real-World OOP Design and System Modeling:
-  - Hotel Booking System with polymorphic room pricing
-  - Online Examination System with timed submissions
-  - Payment Processing Shopping System with multiple payment modes
-  - Vehicle Rental System with rental duration calculations
-  - Employee Leave Request Workflow
-  - Campus Notice Broadcaster, Hostel Laundry Queue, and Ticket Counter simulations
+- Worked on Real-World OOP System Design and workflow coordination:
+  - Modeling multi-entity systems with state management and business rules
+  - Booking, reservation, and tiered billing systems (Hotels, Vehicle Rentals)
+  - Workflow lifecycles and queue processing (Leave Requests, Exam submissions, Laundry queues)
+  - Clean object collaboration and separation of concerns
 
 **Next Session Plan:**
-- Begin Session 7 topics covering Arrays, Searching, and Optimization techniques.
+- Transition to core algorithms, data structures, and problem-solving techniques in Session 7.
 
 **Issues Faced:**
 - None
 
 ---
 
-## Date: 25-09-2026
+## Date: 19-09-2026
 
 **Today's Work:**
-- Completed Session 5 covering Interfaces, Abstract Classes, and Polymorphic Behavior:
-  - Implementing interfaces for common routines (Orchestra Warm-Up, Morning Wake-Up Circuit)
-  - Abstract class hierarchies (Smart Kitchen Assistant, Talking Toy Box)
-  - Warehouse Label Printer and Package Drop-Off Log
-  - Gallery Description Cards and Skyline Delivery Fleet
-  - Digital Classroom Setup and Backyard Toolshed Routine
+- Covered Abstraction and Interfaces in Java:
+  - Designing contracts with interfaces and implementing multiple behaviors
+  - Abstract classes as base templates with shared logic and hook methods
+  - Loose coupling and coding to interfaces rather than concrete implementations
+  - Practical system models including equipment routines, delivery fleets, and smart assistants
 
 **Next Session Plan:**
-- Begin Session 6 topics covering Real-World OOP System Design.
+- Work on end-to-end real-world object-oriented system design in Session 6.
 
 **Issues Faced:**
 - None
 
 ---
 
-## Date: 18-09-2026
+## Date: 12-09-2026
 
 **Today's Work:**
-- Completed Session 4 covering Inheritance, Method Overriding, and Multi-level Hierarchies:
-  - Three-tier class hierarchies (Three Branches Membership Tree, Three Tiers of Gym)
-  - Inheritance-based discount and fine ledgers (Student Discount Fine Ledger)
-  - Batch enrollment validation with polymorphic checks
-  - Weekly and Nightly circulation reports and audits
-  - Attendance Announcer, Check-in Settlement, Gym Membership, and Premium Loyalty systems
+- Explored Object-Oriented Inheritance and Hierarchy structures:
+  - Subclassing, super constructor invocations, and method overriding
+  - Multi-level class hierarchies and tier-based specializations
+  - Dynamic method dispatch and polymorphic runtime behavior
+  - Structuring discount, fine, and membership systems using inheritance trees
 
 **Next Session Plan:**
-- Begin Session 5 topics covering Interfaces and Abstract Classes.
+- Move on to abstract classes and interface contracts in Session 5.
 
 **Issues Faced:**
 - None
 
 ---
 
-
-## Date: 11-09-2026
-
-**Today's Work:**
-- Completed Week 6 Individual Homework covering:
-  - Access Modifiers
-  - private/default/protected/public
-  - Encapsulation
-  - Constructor validation
-  - JavaBeans
-  - Write-once property
-  - Write-only property
-  - Immutability
-  - final fields/classes
-  - Defensive copying
-  - wither pattern
-  - instanceof
-  - Static initialization
-  - Null-safe processing
-
-**Next Session Plan:**
-- Continue with upcoming semester assignments.
-
-**Issues Faced:**
-- None
-
----
-
-## Date: 04-09-2026
+## Date: 05-09-2026
 
 **Today's Work:**
-- Completed Week 4: Constructors and Java Keywords, Category B Assignment Problems:
-  1. Participant (`this()` constructor chaining)
-  2. Item (`this` keyword for resolving field/parameter naming clashes)
-  3. ParkingTicket (`final` methods for fine calculation and receipt generation)
-  4. MembershipCard (`static` blocks for one-time library information initialization)
-  5. Payment and CardPayment (`instanceof` operator for polymorphic payment processing)
+- Learned and applied Java Access Modifiers and Encapsulation principles:
+  - Scope and boundaries of private, default, protected, and public access levels
+  - Data hiding and defensive encapsulation using getter/setter constraints
+  - Designing JavaBeans with validated properties
+  - Creating immutable objects, defensive copying of arrays, and wither methods
+  - Safe object handling, static initializers, and instanceof type verification
 
 **Next Session Plan:**
-- Begin Session 3 / Week 5 topics covering Inheritance, Method Overriding, and Polymorphism.
+- Explore inheritance, method overriding, and class hierarchies in Session 4.
 
 **Issues Faced:**
 - None
