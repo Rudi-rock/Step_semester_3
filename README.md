@@ -1,5 +1,80 @@
 # Step_semester_3         
 
+## Date: 09-10-2026
+
+**Today's Work:**
+- Completed Session 7 covering Arrays, Searching, and Sliding Window techniques:
+  - Binary Search on sorted data (Library Catalog Lookup, Ticket Price Slot Finder)
+  - 2D Array traversal and aggregation (Warehouse Grid Summary, Class Topper Finder)
+  - Pair with Target Sum — brute-force vs HashSet approach
+  - Two-pointer technique (Maximize Area Between Two Boundaries)
+  - Sliding Window pattern (Hot Weather Alert Windows)
+  - Merging two sorted arrays using two pointers
+
+**Next Session Plan:**
+- Continue with upcoming semester assignments.
+
+**Issues Faced:**
+- None
+
+---
+
+## Date: 02-10-2026
+
+**Today's Work:**
+- Completed Session 6 covering Real-World OOP Design and System Modeling:
+  - Hotel Booking System with polymorphic room pricing
+  - Online Examination System with timed submissions
+  - Payment Processing Shopping System with multiple payment modes
+  - Vehicle Rental System with rental duration calculations
+  - Employee Leave Request Workflow
+  - Campus Notice Broadcaster, Hostel Laundry Queue, and Ticket Counter simulations
+
+**Next Session Plan:**
+- Begin Session 7 topics covering Arrays, Searching, and Optimization techniques.
+
+**Issues Faced:**
+- None
+
+---
+
+## Date: 25-09-2026
+
+**Today's Work:**
+- Completed Session 5 covering Interfaces, Abstract Classes, and Polymorphic Behavior:
+  - Implementing interfaces for common routines (Orchestra Warm-Up, Morning Wake-Up Circuit)
+  - Abstract class hierarchies (Smart Kitchen Assistant, Talking Toy Box)
+  - Warehouse Label Printer and Package Drop-Off Log
+  - Gallery Description Cards and Skyline Delivery Fleet
+  - Digital Classroom Setup and Backyard Toolshed Routine
+
+**Next Session Plan:**
+- Begin Session 6 topics covering Real-World OOP System Design.
+
+**Issues Faced:**
+- None
+
+---
+
+## Date: 18-09-2026
+
+**Today's Work:**
+- Completed Session 4 covering Inheritance, Method Overriding, and Multi-level Hierarchies:
+  - Three-tier class hierarchies (Three Branches Membership Tree, Three Tiers of Gym)
+  - Inheritance-based discount and fine ledgers (Student Discount Fine Ledger)
+  - Batch enrollment validation with polymorphic checks
+  - Weekly and Nightly circulation reports and audits
+  - Attendance Announcer, Check-in Settlement, Gym Membership, and Premium Loyalty systems
+
+**Next Session Plan:**
+- Begin Session 5 topics covering Interfaces and Abstract Classes.
+
+**Issues Faced:**
+- None
+
+---
+
+
 ## Date: 11-09-2026
 
 **Today's Work:**
