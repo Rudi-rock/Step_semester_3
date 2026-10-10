@@ -7,10 +7,6 @@ import java.util.Map;
 
 public class VehicleRentalSystem {
 
-    // ==========================================
-    // Entities & Abstractions
-    // ==========================================
-
     public static class Customer {
         private final String customerId;
         private final String name;
@@ -93,7 +89,6 @@ public class VehicleRentalSystem {
 
         public abstract String getCategory();
 
-        // Polymorphic pricing calculation
         public abstract double calculateRentalCost(int days);
 
         @Override
@@ -103,7 +98,7 @@ public class VehicleRentalSystem {
     }
 
     public static class Sedan extends Vehicle {
-        private static final double LUXURY_TAX_RATE = 0.05; // 5% luxury tax
+        private static final double LUXURY_TAX_RATE = 0.05;
 
         public Sedan(String vehicleId, String model, double baseDailyRate) {
             super(vehicleId, model, baseDailyRate);
@@ -235,10 +230,6 @@ public class VehicleRentalSystem {
         }
     }
 
-    // ==========================================
-    // System State & Operations
-    // ==========================================
-
     private final Map<String, Vehicle> inventory = new HashMap<>();
     private final Map<String, Rental> activeRentals = new HashMap<>();
 
@@ -302,7 +293,6 @@ public class VehicleRentalSystem {
 
         VehicleRentalSystem system = new VehicleRentalSystem();
 
-        // 1. Add vehicles of different categories
         Vehicle sedan = new Sedan("V-101", "Honda City", 2000.0);
         Vehicle suv = new SUV("V-201", "Toyota Fortuner", 3500.0);
         Vehicle truck = new Truck("V-301", "Tata Prima 4028", 5000.0);
@@ -316,23 +306,18 @@ public class VehicleRentalSystem {
             System.out.println(" - " + v);
         }
 
-        // 2. Create Customers
         Customer c1 = new Customer("C-1", "Aarav Sharma", "DL-04-202100123");
         Customer c2 = new Customer("C-2", "Priya Sen", "MH-12-201900456");
 
-        // 3. Rent a Sedan for 3 days
         System.out.println("\n--- Renting Sedan ---");
         Rental r1 = system.rentVehicle("RNT-001", c1, "V-101", 3);
 
-        // 4. Attempt to double-rent the same Sedan
         System.out.println("\n--- Attempting Double-Rental of Sedan ---");
         Rental r2 = system.rentVehicle("RNT-002", c2, "V-101", 2);
 
-        // 5. Rent an SUV for 4 days
         System.out.println("\n--- Renting SUV ---");
         Rental r3 = system.rentVehicle("RNT-003", c2, "V-201", 4);
 
-        // 6. Rent a Truck for 2 days
         System.out.println("\n--- Renting Truck ---");
         Customer c3 = new Customer("C-3", "Vikram Logistics", "KA-01-201800987");
         Rental r4 = system.rentVehicle("RNT-004", c3, "V-301", 2);
@@ -342,7 +327,6 @@ public class VehicleRentalSystem {
             System.out.println(" - " + v);
         }
 
-        // 7. Return the Sedan and verify availability
         System.out.println("\n--- Returning Sedan ---");
         system.returnVehicle("RNT-001");
 
@@ -351,7 +335,6 @@ public class VehicleRentalSystem {
             System.out.println(" - " + v);
         }
 
-        // 8. Now Customer 2 can rent the returned Sedan
         System.out.println("\n--- Renting previously returned Sedan ---");
         system.rentVehicle("RNT-005", c2, "V-101", 2);
     }

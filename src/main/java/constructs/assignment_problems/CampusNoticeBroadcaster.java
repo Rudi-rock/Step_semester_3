@@ -8,10 +8,6 @@ import java.util.Set;
 
 public class CampusNoticeBroadcaster {
 
-    // ==========================================
-    // Abstraction: NotificationChannel (Loose Coupling)
-    // ==========================================
-
     public interface NotificationChannel {
         String getChannelName();
         void sendNotification(Student student, Notice notice);
@@ -56,7 +52,6 @@ public class CampusNoticeBroadcaster {
         }
     }
 
-    // Extensibility Demonstration: Adding WhatsAppChannel without altering NoticeBoard
     public static class WhatsAppChannel implements NotificationChannel {
         @Override
         public String getChannelName() {
@@ -69,10 +64,6 @@ public class CampusNoticeBroadcaster {
                     "Direct Message: " + notice.getTitle() + " - " + notice.getContent());
         }
     }
-
-    // ==========================================
-    // Student Entity
-    // ==========================================
 
     public static class Student {
         private final String studentId;
@@ -135,10 +126,6 @@ public class CampusNoticeBroadcaster {
         }
     }
 
-    // ==========================================
-    // Notice Entity
-    // ==========================================
-
     public static class Notice {
         private final String noticeId;
         private final String title;
@@ -189,10 +176,6 @@ public class CampusNoticeBroadcaster {
         }
     }
 
-    // ==========================================
-    // NoticeBoard & Demonstration
-    // ==========================================
-
     public static class NoticeBoard {
         private final List<Student> registeredStudents = new ArrayList<>();
         private final List<Notice> postedNotices = new ArrayList<>();
@@ -203,7 +186,6 @@ public class CampusNoticeBroadcaster {
             }
         }
 
-        // NoticeBoard does not depend on any concrete NotificationChannel implementations (Loose Coupling)
         public void postNotice(Notice notice) {
             postedNotices.add(notice);
             System.out.println("\n>>> [BROADCASTING NOTICE] " + notice.getTitle() + " <<<");
@@ -211,11 +193,11 @@ public class CampusNoticeBroadcaster {
 
             int recipientCount = 0;
             for (Student student : registeredStudents) {
-                // Filter: Only students belonging to target departments receive the notice
+
                 if (notice.getTargetDepartments().contains(student.getDepartment())) {
                     recipientCount++;
                     System.out.println("Delivering to " + student.getName() + " (" + student.getDepartment() + "):");
-                    // Polymorphic dispatch across all student preferred channels
+
                     for (NotificationChannel channel : student.getPreferredChannels()) {
                         channel.sendNotification(student, notice);
                     }
@@ -233,13 +215,11 @@ public class CampusNoticeBroadcaster {
 
         NoticeBoard noticeBoard = new NoticeBoard();
 
-        // 1. Create Channels
         NotificationChannel email = new EmailChannel();
         NotificationChannel sms = new SmsChannel();
         NotificationChannel app = new AppChannel();
-        NotificationChannel whatsApp = new WhatsAppChannel(); // Open-closed extensibility
+        NotificationChannel whatsApp = new WhatsAppChannel();
 
-        // 2. Setup Students with departments and channel preferences
         Student s1 = new Student("S101", "Aarav Sharma", "CSE", "aarav@campus.edu", "+91-9800000001");
         s1.addPreferredChannel(email);
         s1.addPreferredChannel(app);
@@ -250,7 +230,7 @@ public class CampusNoticeBroadcaster {
 
         Student s3 = new Student("S103", "Rohan Verma", "ECE", "rohan@campus.edu", "+91-9800000003");
         s3.addPreferredChannel(app);
-        s3.addPreferredChannel(whatsApp); // using newly added channel without touching NoticeBoard
+        s3.addPreferredChannel(whatsApp);
 
         Student s4 = new Student("S104", "Manish Rao", "MECH", "manish@campus.edu", "+91-9800000004");
         s4.addPreferredChannel(sms);
@@ -266,25 +246,21 @@ public class CampusNoticeBroadcaster {
         System.out.println(" - " + s3 + " Preferred: App, WhatsApp");
         System.out.println(" - " + s4 + " Preferred: SMS");
 
-        // 3. Post Notice targeted to CSE only
         System.out.println("\n--- Step 1: Posting Notice for CSE only ---");
         Notice cseNotice = new Notice("N-01", "Hackathon Registration Open",
                 "Sign up for Smart Campus Hackathon before Oct 15", Set.of("CSE"));
         noticeBoard.postNotice(cseNotice);
 
-        // 4. Post Notice targeted to both CSE and ECE
         System.out.println("\n--- Step 2: Posting Notice for CSE and ECE ---");
         Notice techNotice = new Notice("N-02", "Robotics & AI Symposium",
                 "Workshop on Embedded Systems in Auditorium A", Set.of("CSE", "ECE"));
         noticeBoard.postNotice(techNotice);
 
-        // 5. Post Notice targeted to MECH only
         System.out.println("\n--- Step 3: Posting Notice for MECH only ---");
         Notice mechNotice = new Notice("N-03", "AutoCAD Certification Exam",
                 "CAD lab 3 will host the certification on Monday", Set.of("MECH"));
         noticeBoard.postNotice(mechNotice);
 
-        // 6. Post Notice targeted to CIVIL (No students registered in CIVIL)
         System.out.println("\n--- Step 4: Posting Notice for CIVIL (Untargeted Dept) ---");
         Notice civilNotice = new Notice("N-04", "Structural Design Seminar",
                 "Seminar on green buildings", Set.of("CIVIL"));

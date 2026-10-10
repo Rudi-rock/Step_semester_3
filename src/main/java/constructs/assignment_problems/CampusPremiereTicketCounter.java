@@ -9,10 +9,6 @@ import java.util.Map;
 
 public class CampusPremiereTicketCounter {
 
-    // ==========================================
-    // Customer Entity
-    // ==========================================
-
     public static class Customer {
         private final String customerId;
         private final String name;
@@ -51,10 +47,6 @@ public class CampusPremiereTicketCounter {
         }
     }
 
-    // ==========================================
-    // Seat Hierarchy (Polymorphic Pricing)
-    // ==========================================
-
     public static abstract class Seat {
         private final String seatNumber;
         private boolean isBooked;
@@ -81,7 +73,6 @@ public class CampusPremiereTicketCounter {
 
         public abstract String getCategory();
 
-        // Polymorphic pricing abstraction
         public abstract double getPrice();
 
         @Override
@@ -137,10 +128,6 @@ public class CampusPremiereTicketCounter {
             return 400.0;
         }
     }
-
-    // ==========================================
-    // Show & Booking Entities
-    // ==========================================
 
     public static class Show {
         private final String showId;
@@ -272,10 +259,6 @@ public class CampusPremiereTicketCounter {
         }
     }
 
-    // ==========================================
-    // System State & Operations
-    // ==========================================
-
     private static final int MAX_SEATS_PER_BOOKING = 6;
     private final Map<String, Booking> bookings = new HashMap<>();
 
@@ -331,7 +314,6 @@ public class CampusPremiereTicketCounter {
 
         CampusPremiereTicketCounter counter = new CampusPremiereTicketCounter();
 
-        // 1. Setup Show with Seats
         LocalDateTime showTime = LocalDateTime.of(2026, 10, 10, 18, 30);
         Show movieShow = new Show("SHW-01", "Interstellar Re-Release", showTime);
 
@@ -345,29 +327,23 @@ public class CampusPremiereTicketCounter {
         Customer c1 = new Customer("C-1", "Varun Dhawan", "9988776655");
         Customer c2 = new Customer("C-2", "Alia Bhatt", "9876501234");
 
-        // 2. Successful Booking: 1 Regular (150) + 1 Premium (250) + 1 Recliner (400) = 800
         System.out.println("\n--- Step 1: Customer 1 books 3 seats (A1, B1, C1) ---");
         Booking b1 = counter.bookTickets("BK-101", c1, movieShow, List.of("A1", "B1", "C1"));
         System.out.println(b1);
 
-        // 3. Attempt to book > 6 seats
         System.out.println("\n--- Step 2: Attempting to book 7 seats (Exceeds Max Limit of 6) ---");
         counter.bookTickets("BK-102", c2, movieShow, List.of("A1", "A2", "B1", "B2", "C1", "C2", "D1"));
 
-        // 4. Double-booking prevention
         System.out.println("\n--- Step 3: Customer 2 attempts to double-book Seat B1 ---");
         counter.bookTickets("BK-103", c2, movieShow, List.of("A2", "B1"));
 
-        // 5. Successful cancellation before show starts
         System.out.println("\n--- Step 4: Customer 1 cancels booking before show starts (Oct 10 at 14:00) ---");
         counter.cancelBooking("BK-101", LocalDateTime.of(2026, 10, 10, 14, 0));
 
-        // 6. Now Customer 2 can book the released seats
         System.out.println("\n--- Step 5: Customer 2 books previously freed seats (A1, B1, C1) ---");
         Booking b2 = counter.bookTickets("BK-104", c2, movieShow, List.of("A1", "B1", "C1"));
         System.out.println(b2);
 
-        // 7. Attempting cancellation after show has started
         System.out.println("\n--- Step 6: Customer 2 attempts cancellation after show start time ---");
         counter.cancelBooking("BK-104", LocalDateTime.of(2026, 10, 10, 19, 0));
     }

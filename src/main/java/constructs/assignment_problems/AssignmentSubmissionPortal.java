@@ -5,10 +5,6 @@ import java.time.temporal.ChronoUnit;
 
 public class AssignmentSubmissionPortal {
 
-    // ==========================================
-    // Student Entity
-    // ==========================================
-
     public static class Student {
         private final String studentId;
         private final String name;
@@ -37,10 +33,6 @@ public class AssignmentSubmissionPortal {
             return name + " (" + studentId + ")";
         }
     }
-
-    // ==========================================
-    // Assignment Hierarchy & Polymorphic Penalties
-    // ==========================================
 
     public static abstract class Assignment {
         private final String assignmentId;
@@ -85,7 +77,6 @@ public class AssignmentSubmissionPortal {
 
         public abstract String getAssignmentType();
 
-        // Polymorphic late penalty calculation based on assignment type
         public abstract double calculateLatePenalty(double rawScore, int lateDays);
 
         public int calculateLateDays(LocalDateTime submissionTime) {
@@ -103,7 +94,7 @@ public class AssignmentSubmissionPortal {
     }
 
     public static class CodingAssignment extends Assignment {
-        private static final double PENALTY_PER_DAY = 0.10; // 10% per late day
+        private static final double PENALTY_PER_DAY = 0.10;
 
         public CodingAssignment(String assignmentId, String title, LocalDateTime dueDate, double maxMarks) {
             super(assignmentId, title, dueDate, maxMarks);
@@ -122,7 +113,7 @@ public class AssignmentSubmissionPortal {
     }
 
     public static class WrittenAssignment extends Assignment {
-        private static final double PENALTY_PER_DAY = 0.20; // 20% per late day
+        private static final double PENALTY_PER_DAY = 0.20;
 
         public WrittenAssignment(String assignmentId, String title, LocalDateTime dueDate, double maxMarks) {
             super(assignmentId, title, dueDate, maxMarks);
@@ -139,10 +130,6 @@ public class AssignmentSubmissionPortal {
             return rawScore * PENALTY_PER_DAY * lateDays;
         }
     }
-
-    // ==========================================
-    // Submission Lifecycle & Grading
-    // ==========================================
 
     public enum SubmissionStatus {
         Submitted,
@@ -258,16 +245,11 @@ public class AssignmentSubmissionPortal {
         }
     }
 
-    // ==========================================
-    // Demonstration
-    // ==========================================
-
     public static void main(String[] args) {
         System.out.println("=== Assignment Submission Portal Demonstration ===");
 
         LocalDateTime baseDue = LocalDateTime.of(2026, 10, 5, 23, 59);
 
-        // 1. Create Coding and Written Assignments
         Assignment codingAssignment = new CodingAssignment("ASG-CS101", "DSA Binary Search Tree", baseDue, 100.0);
         Assignment writtenAssignment = new WrittenAssignment("ASG-ENG201", "Technical Essay on Ethics", baseDue, 100.0);
 
@@ -279,26 +261,22 @@ public class AssignmentSubmissionPortal {
         Student s2 = new Student("STU-2", "Pooja Hegde");
         Student s3 = new Student("STU-3", "Tarun Roy");
 
-        // 2. Student 1: Submits Coding Assignment ON TIME (Oct 5 at 20:00)
         System.out.println("\n--- Step 1: On-time Coding Submission ---");
         Submission sub1 = new Submission("SUB-01", s1, codingAssignment,
                 LocalDateTime.of(2026, 10, 5, 20, 0), "public class BST { ... }");
         System.out.println("Status before grading: " + sub1.getStatus());
         sub1.grade(95.0);
 
-        // 3. Student 2: Submits Coding Assignment 2 DAYS LATE (Oct 7 at 12:00)
         System.out.println("\n--- Step 2: Late Coding Submission (2 days late) ---");
         Submission sub2 = new Submission("SUB-02", s2, codingAssignment,
                 LocalDateTime.of(2026, 10, 7, 12, 0), "class BSTSolution { ... }");
         sub2.grade(90.0);
 
-        // 4. Student 3: Submits Written Assignment 2 DAYS LATE (Oct 7 at 12:00)
         System.out.println("\n--- Step 3: Late Written Submission (2 days late) ---");
         Submission sub3 = new Submission("SUB-03", s3, writtenAssignment,
                 LocalDateTime.of(2026, 10, 7, 12, 0), "Ethics Essay Draft");
         sub3.grade(90.0);
 
-        // 5. Attempting to resubmit after being graded (Forbidden)
         System.out.println("\n--- Step 4: Attempting to resubmit already GRADED assignment ---");
         try {
             sub1.resubmit(LocalDateTime.of(2026, 10, 8, 10, 0), "Updated BST Code");
@@ -306,7 +284,6 @@ public class AssignmentSubmissionPortal {
             System.out.println("[BLOCKED] Caught expected exception: " + e.getMessage());
         }
 
-        // 6. Resubmission allowed BEFORE grading
         System.out.println("\n--- Step 5: Resubmission allowed BEFORE grading ---");
         Submission sub4 = new Submission("SUB-04", s1, writtenAssignment,
                 LocalDateTime.of(2026, 10, 4, 15, 0), "First Essay Draft");

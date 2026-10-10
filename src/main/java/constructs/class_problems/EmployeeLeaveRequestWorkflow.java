@@ -2,10 +2,6 @@ package constructs.class_problems;
 
 public class EmployeeLeaveRequestWorkflow {
 
-    // ==========================================
-    // Status Enum & Reviewer
-    // ==========================================
-
     public enum LeaveStatus {
         PENDING,
         UNDER_REVIEW,
@@ -47,10 +43,6 @@ public class EmployeeLeaveRequestWorkflow {
             return name + " (" + designation + ")";
         }
     }
-
-    // ==========================================
-    // Employee Hierarchy (Abstraction & Polymorphism)
-    // ==========================================
 
     public static abstract class Employee {
         private final String employeeId;
@@ -182,10 +174,6 @@ public class EmployeeLeaveRequestWorkflow {
         }
     }
 
-    // ==========================================
-    // Controlled State Transition LeaveRequest
-    // ==========================================
-
     public static class LeaveRequest {
         private final String requestId;
         private final Employee employee;
@@ -244,7 +232,6 @@ public class EmployeeLeaveRequestWorkflow {
             return reviewerComments;
         }
 
-        // Controlled State Transition: PENDING -> UNDER_REVIEW
         public boolean review(Reviewer reviewer, String comments) {
             if (status == LeaveStatus.APPROVED || status == LeaveStatus.REJECTED) {
                 System.out.println("[ERROR] Cannot review request " + requestId +
@@ -263,7 +250,6 @@ public class EmployeeLeaveRequestWorkflow {
             return true;
         }
 
-        // Controlled State Transition: UNDER_REVIEW -> APPROVED
         public boolean approve(Reviewer reviewer) {
             if (status == LeaveStatus.PENDING) {
                 System.out.println("[ERROR] Request " + requestId +
@@ -293,7 +279,6 @@ public class EmployeeLeaveRequestWorkflow {
             return true;
         }
 
-        // Controlled State Transition: UNDER_REVIEW -> REJECTED
         public boolean reject(Reviewer reviewer, String reason) {
             if (status == LeaveStatus.PENDING) {
                 System.out.println("[ERROR] Request " + requestId +
@@ -314,7 +299,6 @@ public class EmployeeLeaveRequestWorkflow {
             return true;
         }
 
-        // Controlled State Transition: Attempting to reset back to PENDING is strictly forbidden
         public void resetToPending() {
             if (status == LeaveStatus.APPROVED || status == LeaveStatus.REJECTED) {
                 throw new IllegalStateException("Approved or Rejected requests cannot return to Pending!");
@@ -330,14 +314,9 @@ public class EmployeeLeaveRequestWorkflow {
         }
     }
 
-    // ==========================================
-    // Demonstration
-    // ==========================================
-
     public static void main(String[] args) {
         System.out.println("=== Employee Leave Request Workflow Demonstration ===");
 
-        // 1. Create different types of employees
         Employee fullTime = new FullTimeEmployee("EMP-001", "Aditi Rao", 20);
         Employee partTime = new PartTimeEmployee("EMP-002", "Bhavik Shah", 5);
         Employee contractor = new Contractor("EMP-003", "Chetan Verma");
@@ -349,28 +328,23 @@ public class EmployeeLeaveRequestWorkflow {
         System.out.println(" - " + partTime);
         System.out.println(" - " + contractor);
 
-        // 2. Full-time employee submits valid leave request
         System.out.println("\n--- Step 1: Full-time Employee submits 5 days leave ---");
         LeaveRequest req1 = new LeaveRequest("LR-001", fullTime, 5, "Family vacation");
         System.out.println("Created: " + req1);
 
-        // 3. Attempt to approve directly without review (Should be blocked)
         System.out.println("\n--- Step 2: Attempting to approve directly from PENDING (Forbidden) ---");
         boolean approvedDirectly = req1.approve(manager);
         System.out.println("Direct approval result: " + approvedDirectly);
 
-        // 4. Properly review the request
         System.out.println("\n--- Step 3: Manager reviews request LR-001 ---");
         req1.review(manager, "Project deliverables are on schedule, leave can be granted.");
         System.out.println("Current status: " + req1.getStatus());
 
-        // 5. Approve the reviewed request
         System.out.println("\n--- Step 4: Manager approves request LR-001 ---");
         req1.approve(manager);
         System.out.println("Final status: " + req1.getStatus());
         System.out.println("Updated Employee: " + fullTime);
 
-        // 6. Attempt to reset an approved request back to PENDING (Must fail)
         System.out.println("\n--- Step 5: Attempting to reset APPROVED request back to PENDING ---");
         try {
             req1.resetToPending();
@@ -378,14 +352,12 @@ public class EmployeeLeaveRequestWorkflow {
             System.out.println("[BLOCKED] Exception caught as expected: " + e.getMessage());
         }
 
-        // 7. Part-time employee submits excessive leave (Policy violation)
         System.out.println("\n--- Step 6: Part-Time Employee applies for 8 days (Policy Limit: 5) ---");
         LeaveRequest req2 = new LeaveRequest("LR-002", partTime, 8, "Attending conference");
         req2.review(manager, "Reviewing 8 days request against policy.");
-        req2.approve(manager); // Will fail policy check and reject
+        req2.approve(manager);
         System.out.println("Request LR-002 status: " + req2.getStatus());
 
-        // 8. Contractor applies for valid emergency leave
         System.out.println("\n--- Step 7: Contractor applies for 2 days leave ---");
         LeaveRequest req3 = new LeaveRequest("LR-003", contractor, 2, "Medical appointment");
         req3.review(manager, "Stand-in contractor assigned for two days.");

@@ -7,10 +7,6 @@ import java.util.Map;
 
 public class HostelLaundryQueue {
 
-    // ==========================================
-    // Abstraction: WashType Interface (Open-Closed Principle)
-    // ==========================================
-
     public interface WashType {
         String getTypeName();
         int getDurationMinutes();
@@ -83,7 +79,6 @@ public class HostelLaundryQueue {
         }
     }
 
-    // Newly added wash type without modifying any core booking logic!
     public static class SanitizeDelicateWash implements WashType {
         @Override
         public String getTypeName() {
@@ -105,10 +100,6 @@ public class HostelLaundryQueue {
             return getTypeName() + " (" + getDurationMinutes() + " mins, INR " + getCost() + ")";
         }
     }
-
-    // ==========================================
-    // Student Entity
-    // ==========================================
 
     public static class Student {
         private final String studentId;
@@ -144,10 +135,6 @@ public class HostelLaundryQueue {
             return name + " (" + studentId + ", Room: " + roomNumber + ")";
         }
     }
-
-    // ==========================================
-    // WashingMachine & WashCycle
-    // ==========================================
 
     public static class WashingMachine {
         private final String machineId;
@@ -265,10 +252,6 @@ public class HostelLaundryQueue {
         }
     }
 
-    // ==========================================
-    // System State & Operations
-    // ==========================================
-
     private final Map<String, WashingMachine> machines = new HashMap<>();
     private final List<WashCycle> activeCycles = new ArrayList<>();
 
@@ -301,7 +284,6 @@ public class HostelLaundryQueue {
 
         HostelLaundryQueue queueSystem = new HostelLaundryQueue();
 
-        // 1. Setup Washing Machines
         WashingMachine wm1 = new WashingMachine("WM-01");
         WashingMachine wm2 = new WashingMachine("WM-02");
         queueSystem.addMachine(wm1);
@@ -311,26 +293,21 @@ public class HostelLaundryQueue {
         System.out.println(" - " + wm1);
         System.out.println(" - " + wm2);
 
-        // 2. Students
         Student s1 = new Student("STU-101", "Kabir Sharma", "H3-204");
         Student s2 = new Student("STU-102", "Rhea Sengupta", "H3-305");
         Student s3 = new Student("STU-103", "Dev Anand", "H3-108");
 
-        // 3. Wash Types
         WashType quick = new QuickWash();
         WashType normal = new NormalWash();
         WashType heavy = new HeavyWash();
         WashType sanitize = new SanitizeDelicateWash();
 
-        // 4. Student 1 starts Quick Wash on WM-01
         System.out.println("\n--- Step 1: Kabir starts Quick Wash on WM-01 ---");
         WashCycle c1 = queueSystem.startWash("CYC-01", s1, "WM-01", quick);
 
-        // 5. Student 2 tries to use WM-01 while it is busy (Must be blocked)
         System.out.println("\n--- Step 2: Rhea attempts to start Normal Wash on busy WM-01 ---");
         WashCycle c2Blocked = queueSystem.startWash("CYC-02", s2, "WM-01", normal);
 
-        // 6. Student 2 uses WM-02 instead (Available)
         System.out.println("\n--- Step 3: Rhea uses WM-02 for Heavy Wash ---");
         WashCycle c2 = queueSystem.startWash("CYC-03", s2, "WM-02", heavy);
 
@@ -338,14 +315,12 @@ public class HostelLaundryQueue {
         System.out.println(" - " + wm1);
         System.out.println(" - " + wm2);
 
-        // 7. Complete Wash on WM-01 (Machine freed)
         System.out.println("\n--- Step 4: Completing Kabir's wash on WM-01 ---");
         c1.completeWash();
 
         System.out.println("\nMachine Status After WM-01 Completion:");
         System.out.println(" - " + wm1);
 
-        // 8. Student 3 now starts newly introduced SanitizeDelicateWash on WM-01
         System.out.println("\n--- Step 5: Dev starts newly introduced SanitizeDelicateWash on WM-01 ---");
         WashCycle c3 = queueSystem.startWash("CYC-04", s3, "WM-01", sanitize);
         System.out.println("Active Cycle: " + c3);

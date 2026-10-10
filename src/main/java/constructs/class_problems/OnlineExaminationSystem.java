@@ -10,10 +10,6 @@ import java.util.Set;
 
 public class OnlineExaminationSystem {
 
-    // ==========================================
-    // Student & Answer
-    // ==========================================
-
     public static class Student {
         private final String studentId;
         private final String name;
@@ -66,10 +62,6 @@ public class OnlineExaminationSystem {
         }
     }
 
-    // ==========================================
-    // Question Hierarchy (Polymorphic Evaluation)
-    // ==========================================
-
     public static abstract class Question {
         private final int questionId;
         private final String questionText;
@@ -101,7 +93,6 @@ public class OnlineExaminationSystem {
 
         public abstract String getQuestionType();
 
-        // Polymorphic evaluation based on concrete question type
         public abstract double evaluate(Answer answer);
 
         @Override
@@ -112,7 +103,7 @@ public class OnlineExaminationSystem {
 
     public static class MCQQuestion extends Question {
         private final List<String> options;
-        private final int correctOptionIndex; // 0-based
+        private final int correctOptionIndex;
 
         public MCQQuestion(int questionId, String questionText, double maxMarks, List<String> options, int correctOptionIndex) {
             super(questionId, questionText, maxMarks);
@@ -201,10 +192,6 @@ public class OnlineExaminationSystem {
         }
     }
 
-    // ==========================================
-    // Attempt States & Evaluation
-    // ==========================================
-
     public enum AttemptStatus {
         InProgress,
         Submitted
@@ -291,10 +278,6 @@ public class OnlineExaminationSystem {
         }
     }
 
-    // ==========================================
-    // Examination System
-    // ==========================================
-
     public static class Examination {
         private final String examId;
         private final String title;
@@ -347,7 +330,6 @@ public class OnlineExaminationSystem {
     public static void main(String[] args) {
         System.out.println("=== Online Examination System Demonstration ===");
 
-        // 1. Create Examination and Questions
         Examination exam = new Examination("EX-101", "Java OOP & Design Principles");
 
         List<String> mcqOptions = List.of("Polymorphism", "Compilation", "Pointers", "Assembly");
@@ -360,27 +342,22 @@ public class OnlineExaminationSystem {
             System.out.println(" - " + q);
         }
 
-        // 2. Student 1 starts attempt
         Student s1 = new Student("STU-01", "Rohan Gupta");
         System.out.println("\n--- Step 1: " + s1.getName() + " starts exam attempt ---");
         Attempt attempt1 = exam.startAttempt("ATT-001", s1);
 
-        // 3. Record and modify answers before submission
         System.out.println("\n--- Step 2: Answering questions (Allowed before submission) ---");
-        attempt1.recordAnswer(1, "2"); // wrong answer initially
+        attempt1.recordAnswer(1, "2");
         attempt1.recordAnswer(2, "true");
 
-        // Changing answer for Q1 before submission
         System.out.println("\n--- Modifying Answer for Q1 before submission ---");
-        attempt1.recordAnswer(1, "0"); // revised to correct answer
+        attempt1.recordAnswer(1, "0");
         attempt1.recordAnswer(3, "extends");
 
-        // 4. Submit Attempt 1
         System.out.println("\n--- Step 3: Submitting Attempt 1 ---");
         attempt1.submit();
         attempt1.displayResult();
 
-        // 5. Attempting to change answer after submission (Forbidden)
         System.out.println("\n--- Step 4: Attempting to modify answer after submission ---");
         try {
             attempt1.recordAnswer(1, "1");
@@ -388,12 +365,10 @@ public class OnlineExaminationSystem {
             System.out.println("[BLOCKED] Caught expected exception: " + e.getMessage());
         }
 
-        // 6. Attempting a second attempt for the same student on the same exam (Forbidden)
         System.out.println("\n--- Step 5: Attempting second attempt for " + s1.getName() + " ---");
         Attempt attempt2 = exam.startAttempt("ATT-002", s1);
         System.out.println("Second attempt creation result: " + (attempt2 == null ? "Blocked" : "Allowed"));
 
-        // 7. Another student takes the exam
         Student s2 = new Student("STU-02", "Neha Patel");
         System.out.println("\n--- Step 6: " + s2.getName() + " takes the exam ---");
         Attempt attempt3 = exam.startAttempt("ATT-003", s2);

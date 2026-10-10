@@ -4,10 +4,6 @@ import java.time.LocalDate;
 
 public class FitZoneMembershipDesk {
 
-    // ==========================================
-    // Member Entity
-    // ==========================================
-
     public static class Member {
         private final String memberId;
         private final String name;
@@ -45,10 +41,6 @@ public class FitZoneMembershipDesk {
             return name + " (ID: " + memberId + ", Phone: " + phone + ")";
         }
     }
-
-    // ==========================================
-    // MembershipPlan Abstraction (Polymorphic Fees)
-    // ==========================================
 
     public static abstract class MembershipPlan {
         private final String planName;
@@ -96,7 +88,7 @@ public class FitZoneMembershipDesk {
 
     public static class QuarterlyPlan extends MembershipPlan {
         private static final double BASE_RATE_PER_MONTH = 1000.0;
-        private static final double DISCOUNT_RATE = 0.10; // 10% discount
+        private static final double DISCOUNT_RATE = 0.10;
 
         public QuarterlyPlan() {
             super("Quarterly Plan", 3);
@@ -105,13 +97,13 @@ public class FitZoneMembershipDesk {
         @Override
         public double calculateFee() {
             double gross = BASE_RATE_PER_MONTH * getDurationMonths();
-            return gross - (gross * DISCOUNT_RATE); // INR 2700
+            return gross - (gross * DISCOUNT_RATE);
         }
     }
 
     public static class AnnualPlan extends MembershipPlan {
         private static final double BASE_RATE_PER_MONTH = 1000.0;
-        private static final double DISCOUNT_RATE = 0.25; // 25% discount
+        private static final double DISCOUNT_RATE = 0.25;
 
         public AnnualPlan() {
             super("Annual Plan", 12);
@@ -120,13 +112,9 @@ public class FitZoneMembershipDesk {
         @Override
         public double calculateFee() {
             double gross = BASE_RATE_PER_MONTH * getDurationMonths();
-            return gross - (gross * DISCOUNT_RATE); // INR 9000
+            return gross - (gross * DISCOUNT_RATE);
         }
     }
-
-    // ==========================================
-    // Membership & State Management
-    // ==========================================
 
     public enum MembershipStatus {
         Active,
@@ -248,10 +236,6 @@ public class FitZoneMembershipDesk {
                     " | Valid: " + startDate + " to " + endDate + " | Fee: INR " + membershipFee + " | Status: " + status;
         }
     }
-
-    // ==========================================
-    // FitZone Membership Desk Demonstration
-    // ==========================================
 
     public static void main(String[] args) {
         System.out.println("=== FitZone Membership Desk Demonstration ===");

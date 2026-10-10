@@ -7,10 +7,6 @@ import java.util.UUID;
 
 public class PaymentProcessingShoppingSystem {
 
-    // ==========================================
-    // Customer, Product & OrderItem
-    // ==========================================
-
     public static class Customer {
         private final String customerId;
         private final String name;
@@ -119,10 +115,6 @@ public class PaymentProcessingShoppingSystem {
             return product.getName() + " x " + quantity + " = INR " + getSubtotal();
         }
     }
-
-    // ==========================================
-    // Payment Abstraction & Polymorphic Providers
-    // ==========================================
 
     public static class PaymentResult {
         private final boolean success;
@@ -246,10 +238,6 @@ public class PaymentProcessingShoppingSystem {
         }
     }
 
-    // ==========================================
-    // Order & State Management
-    // ==========================================
-
     public enum OrderStatus {
         PENDING,
         PAID,
@@ -349,14 +337,9 @@ public class PaymentProcessingShoppingSystem {
         }
     }
 
-    // ==========================================
-    // Demonstration
-    // ==========================================
-
     public static void main(String[] args) {
         System.out.println("=== Payment Processing Shopping System Demonstration ===");
 
-        // 1. Setup Customer and Products
         Customer customer = new Customer("C-101", "Sanjay Singhania", "sanjay@example.com");
         Product laptop = new Product("P-1", "MacBook Pro 14\"", 160000.0);
         Product mouse = new Product("P-2", "Wireless Ergonomic Mouse", 3500.0);
@@ -364,38 +347,32 @@ public class PaymentProcessingShoppingSystem {
 
         System.out.println("Customer: " + customer);
 
-        // 2. Create Order
         Order order = new Order("ORD-9001", customer);
         System.out.println("\nCreated: " + order);
 
-        // 3. Attempt payment on empty order (Must be rejected)
         System.out.println("\n--- Step 1: Attempting payment on empty order ---");
         PaymentMethod testCard = new CreditCardPayment("4111222233334444", "Sanjay Singhania", 200000.0);
         order.processPayment(testCard);
 
-        // 4. Add items to order
         System.out.println("\n--- Step 2: Adding items to order ---");
-        order.addItem(mouse, 2);    // 2 x 3500 = 7000
-        order.addItem(keyboard, 1); // 1 x 6500 = 6500
+        order.addItem(mouse, 2);
+        order.addItem(keyboard, 1);
         System.out.println("Items in order:");
         for (OrderItem item : order.getItems()) {
             System.out.println(" - " + item);
         }
-        System.out.println("Total Amount: INR " + order.calculateTotal()); // 13500
+        System.out.println("Total Amount: INR " + order.calculateTotal());
 
-        // 5. Attempt payment with insufficient PayPal balance (Should fail and remain PENDING)
         System.out.println("\n--- Step 3: Payment with insufficient PayPal balance ---");
         PaymentMethod lowBalancePayPal = new PayPalPayment("sanjay@paypal.com", 5000.0);
         boolean payPalSuccess = order.processPayment(lowBalancePayPal);
         System.out.println("Payment Success: " + payPalSuccess + " | Order Status: " + order.getStatus());
 
-        // 6. Retry payment using Credit Card with sufficient limit (Should succeed -> PAID)
         System.out.println("\n--- Step 4: Retry payment using Credit Card ---");
         PaymentMethod validCreditCard = new CreditCardPayment("4532789012345678", "Sanjay Singhania", 50000.0);
         boolean ccSuccess = order.processPayment(validCreditCard);
         System.out.println("Payment Success: " + ccSuccess + " | Order Status: " + order.getStatus());
 
-        // 7. Attempt to add item or pay again on PAID order (Blocked)
         System.out.println("\n--- Step 5: Attempting to add item to already PAID order ---");
         try {
             order.addItem(laptop, 1);
@@ -406,10 +383,9 @@ public class PaymentProcessingShoppingSystem {
         System.out.println("\n--- Step 6: Attempting to pay again on PAID order ---");
         order.processPayment(validCreditCard);
 
-        // 8. Second order with Bank Transfer Payment
         System.out.println("\n--- Step 7: Second Order with Bank Transfer ---");
         Order order2 = new Order("ORD-9002", customer);
-        order2.addItem(laptop, 1); // 160000
+        order2.addItem(laptop, 1);
         PaymentMethod bankTransfer = new BankTransferPayment("987654321012", "HDFC Bank", 250000.0);
         order2.processPayment(bankTransfer);
         System.out.println("Final state of Order 2: " + order2);

@@ -10,10 +10,6 @@ import java.util.Map;
 
 public class HotelBookingSystem {
 
-    // ==========================================
-    // Customer Entity
-    // ==========================================
-
     public static class Customer {
         private final String customerId;
         private final String name;
@@ -52,10 +48,6 @@ public class HotelBookingSystem {
         }
     }
 
-    // ==========================================
-    // Room Hierarchy (Polymorphic Pricing)
-    // ==========================================
-
     public static abstract class Room {
         private final String roomNumber;
         private final double baseRatePerNight;
@@ -81,7 +73,6 @@ public class HotelBookingSystem {
 
         public abstract String getCategory();
 
-        // Polymorphic dynamic price calculation based on category & duration
         public abstract double calculatePrice(int nights);
 
         @Override
@@ -110,7 +101,7 @@ public class HotelBookingSystem {
     }
 
     public static class DeluxeRoom extends Room {
-        private static final double AMENITY_SURCHARGE_RATE = 0.15; // 15% luxury amenities surcharge
+        private static final double AMENITY_SURCHARGE_RATE = 0.15;
 
         public DeluxeRoom(String roomNumber, double baseRatePerNight) {
             super(roomNumber, baseRatePerNight);
@@ -129,7 +120,7 @@ public class HotelBookingSystem {
             double base = getBaseRatePerNight() * nights;
             double total = base + (base * AMENITY_SURCHARGE_RATE);
             if (nights >= 4) {
-                total *= 0.95; // 5% extended stay discount
+                total *= 0.95;
             }
             return total;
         }
@@ -152,18 +143,14 @@ public class HotelBookingSystem {
             if (nights <= 0) {
                 throw new IllegalArgumentException("Duration must be at least 1 night.");
             }
-            double base = getBaseRatePerNight() * nights * 1.25; // 25% premium suite service
+            double base = getBaseRatePerNight() * nights * 1.25;
             double total = base + BUTLER_SERVICE_FEE;
             if (nights >= 3) {
-                total *= 0.90; // 10% extended stay discount
+                total *= 0.90;
             }
             return total;
         }
     }
-
-    // ==========================================
-    // Reservation & Booking Management
-    // ==========================================
 
     public enum ReservationStatus {
         CONFIRMED,
@@ -268,10 +255,6 @@ public class HotelBookingSystem {
         }
     }
 
-    // ==========================================
-    // System State & Operations
-    // ==========================================
-
     private final Map<String, Room> rooms = new HashMap<>();
     private final List<Reservation> reservations = new ArrayList<>();
 
@@ -328,7 +311,6 @@ public class HotelBookingSystem {
 
         HotelBookingSystem hotel = new HotelBookingSystem();
 
-        // 1. Add rooms of different categories
         Room std = new StandardRoom("101", 1500.0);
         Room del = new DeluxeRoom("201", 3000.0);
         Room ste = new Suite("301", 6000.0);
@@ -342,45 +324,36 @@ public class HotelBookingSystem {
         System.out.println(" - " + del);
         System.out.println(" - " + ste);
 
-        // 2. Customers
         Customer c1 = new Customer("CUST-1", "Karan Malhotra", "+91-9876543210");
         Customer c2 = new Customer("CUST-2", "Meera Iyer", "+91-9123456780");
 
-        // 3. Book Standard Room: Oct 10 to Oct 15 (5 nights)
         System.out.println("\n--- Step 1: Booking Standard Room 101 (Oct 10 - Oct 15) ---");
         LocalDate d10 = LocalDate.of(2026, 10, 10);
         LocalDate d15 = LocalDate.of(2026, 10, 15);
         hotel.bookRoom("RES-001", c1, "101", d10, d15);
 
-        // 4. Attempt overlapping booking for Room 101: Oct 12 to Oct 17 (Should be blocked)
         System.out.println("\n--- Step 2: Attempting overlapping booking for Room 101 (Oct 12 - Oct 17) ---");
         LocalDate d12 = LocalDate.of(2026, 10, 12);
         LocalDate d17 = LocalDate.of(2026, 10, 17);
         hotel.bookRoom("RES-002", c2, "101", d12, d17);
 
-        // 5. Non-overlapping booking for Room 101: Oct 15 to Oct 18 (Allowed)
         System.out.println("\n--- Step 3: Non-overlapping booking for Room 101 (Oct 15 - Oct 18) ---");
         LocalDate d18 = LocalDate.of(2026, 10, 18);
         hotel.bookRoom("RES-003", c2, "101", d15, d18);
 
-        // 6. Book Deluxe Room with extended stay discount
         System.out.println("\n--- Step 4: Booking Deluxe Room 201 (Oct 10 - Oct 15, 5 nights) ---");
         hotel.bookRoom("RES-004", c1, "201", d10, d15);
 
-        // 7. Book Suite with luxury package
         System.out.println("\n--- Step 5: Booking Suite 301 (Oct 10 - Oct 14, 4 nights) ---");
         LocalDate d14 = LocalDate.of(2026, 10, 14);
         hotel.bookRoom("RES-005", c2, "301", d10, d14);
 
-        // 8. Cancellation test: Cancel RES-001 well before deadline (Oct 5 -> checkIn is Oct 10)
         System.out.println("\n--- Step 6: Valid Cancellation of RES-001 on Oct 5 ---");
         hotel.cancelReservation("RES-001", LocalDate.of(2026, 10, 5));
 
-        // 9. Re-booking the freed dates after cancellation
         System.out.println("\n--- Step 7: Booking newly freed Room 101 after cancellation (Oct 10 - Oct 15) ---");
         hotel.bookRoom("RES-006", c2, "101", d10, d15);
 
-        // 10. Late cancellation attempt: Trying to cancel RES-006 on Oct 9 (CheckIn is Oct 10, deadline passed)
         System.out.println("\n--- Step 8: Late Cancellation attempt for RES-006 on Oct 9 (Deadline passed) ---");
         hotel.cancelReservation("RES-006", LocalDate.of(2026, 10, 9));
     }
